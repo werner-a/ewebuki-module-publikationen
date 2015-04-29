@@ -1,0 +1,35 @@
+<!--##begin-->
+<!--$Id: publikationen.list.tem.html $-->
+<div id="content_1" class="grid-col-2 grid-col-no-gap content">
+    #(inhalt)
+    <p>!#ausgaben_form_error</p>
+    <p><a href="!#ausgaben_link_new">g(new)</a></p>
+    <table width="60%" border="0" cellspacing="0" cellpadding="2">
+        <thead>
+            <tr>
+                <th align="left">#(field1)</th>
+                <th align="left">g(modcol)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--##loop-list-->
+            <tr style="background:!{color}">
+                <td>!{field1}</td>
+                <td style="white-space:nowrap">
+                    <a href="!{edit}"><img src="../../images/default/edit.png" width="24" height="18" alt="g(edit)" title="g(edit)" /></a>
+                    <a href="!{delete}"><img src="../../images/default/delete.png" width="24" height="18" alt="g(delete)" title="g(delete)" /></a>
+                    <a href="!{details}"><img src="../../images/default/details.png" width="24" height="18" alt="g(details)" title="g(details)" /></a>
+                </td>
+            </tr>
+            <!--##cont-->
+        </tbody>
+    </table>
+    <p style="float:left">g(anzahl)!#ausgaben_anzahl</p>
+    <p style="float:right">!#ausgaben_inhalt_selector</p>
+    <div style="clear:both"></div>
+    <p>!#ausgaben_output</p>
+    <p>!#ausgaben_inaccessible</p>
+</div>
+
+#{partMargin}
+<!--##end-->

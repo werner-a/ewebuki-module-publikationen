@@ -1,0 +1,34 @@
+<!--##begin-->
+<!--$Id: publikationen.modify.tem.html $-->
+<script type="text/javascript">
+<!--
+  function resetForm(){
+     document.forms[0].reset();
+  }
+//-->
+</script>
+<div id="content_1" class="grid-col-2 grid-col-no-gap content">
+    #(inhalt)
+    <form method="post" action="!#ausgaben_form_aktion" id="eEd">
+        <h1>#(ueberschrift)</h1>
+        <p>#(inhalt)</p>
+        <p>!#ausgaben_form_error</p>
+        <fieldset>
+            <label for="field1">#(field1)</label>
+            !#element_field1
+            <label for="field2">#(field2)</label>
+            !#element_field2
+            <input type="hidden" name="form_referer" value="!#ausgaben_form_referer" class="hidden" />
+            <div class="clearer">&nbsp;</div>
+            <input type="submit" name="send[]" value="g(send)" class="first" />
+            <input type="reset" name="reset" value="g(reset)" class="next" />
+            <input type="button" name="abort" value="g(abort)" onclick="location='!#ausgaben_form_break'" class="next" />
+            <div class="clearer">&nbsp;</div>
+        </fieldset>
+        <p>!#ausgaben_output</p>
+        <p>!#ausgaben_inaccessible</p>
+    </form>
+</div>
+
+#{partMargin}
+<!--##end-->

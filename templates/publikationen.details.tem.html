@@ -1,0 +1,24 @@
+<!--##begin-->
+<!--$Id: publikationen.details.tem.html $-->
+<div id="content_1" class="grid-col-2 grid-col-no-gap content">
+    #(inhalt)
+    <h1>#(ueberschrift)</h1>
+    <p>#(inhalt)</p>
+    <h2>#(field1)</h2>
+    <p>!#ausgaben_field1</p>
+    <h2>#(field2)</h2>
+    <p>!#ausgaben_field2</p>
+    <!--##hide-members-->
+    <h2>#(user)</h2>
+    <p>!#ausgaben_members</p>
+    <!--##show-->
+    <p>
+        <a href="!#ausgaben_link_list"><img src="../../images/default/left.png" width="24" height="18" alt="g(back)" title="g(back)" /></a>
+        <a href="!#ausgaben_link_edit"><img src="../../images/default/edit.png" width="24" height="18" alt="g(edit)" title="g(edit)" /></a>
+    </p>
+    <p>!#ausgaben_output</p>
+    <p>!#ausgaben_inaccessible</p>
+</div>
+
+#{partMargin}
+<!--##end-->
