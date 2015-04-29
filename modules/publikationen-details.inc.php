@@ -76,8 +76,8 @@
         ### put your code here ###
 
         $sql = "SELECT *
-                  FROM ".$cfg["publikationen"]["db"]["leer"]["entries"]."
-                 WHERE ".$cfg["publikationen"]["db"]["leer"]["key"]."='".$environment["parameter"][1]."'";
+                  FROM ".$cfg["publikationen"]["db"]["main"]["entries"]."
+                 WHERE ".$cfg["publikationen"]["db"]["main"]["key"]."='".$environment["parameter"][1]."'";
         if ( $debugging["sql_enable"] ) $debugging["ausgabe"] .= "sql: ".$sql.$debugging["char"];
         $result = $db -> query($sql);
         $data = $db -> fetch_array($result,1);

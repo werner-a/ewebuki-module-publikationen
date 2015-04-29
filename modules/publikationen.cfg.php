@@ -60,8 +60,8 @@
               #"edit,global" => array("global1", "global2"),
                        ),
                "db" => array(
-                     "leer" => array(
-                          "entries" => "db_leer",
+                             "main" => array(
+                          "entries" => "db_publikationen",
                               "key" => "id",
                             "order" => "sort, label",
                             "rows"  => 4,
@@ -69,10 +69,6 @@
               ),
             "right" => "",
     );
-
-    // * tipp: fuer das einfache modul muss der wert $cfg["basis"] natuerlich
-    // "/my" lauten. es funktioniert im beispiel nur ohne aenderung, da das
-    // einfache script $cfg["basis] nicht nutzt.
 
 ////+///////+///////+///////+///////+///////+///////+///////////////////////////////////////////////////////////
 ?>

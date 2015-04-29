@@ -50,8 +50,8 @@
 
         if ( count($_POST) == 0 ) {
             $sql = "SELECT *
-                      FROM ".$cfg["publikationen"]["db"]["leer"]["entries"]."
-                     WHERE ".$cfg["publikationen"]["db"]["leer"]["key"]."='".$environment["parameter"][1]."'";
+                      FROM ".$cfg["publikationen"]["db"]["main"]["entries"]."
+                     WHERE ".$cfg["publikationen"]["db"]["main"]["key"]."='".$environment["parameter"][1]."'";
             if ( $debugging["sql_enable"] ) $debugging["ausgabe"] .= "sql: ".$sql.$debugging["char"];
             $result = $db -> query($sql);
             $form_values = $db -> fetch_array($result,1);
@@ -63,7 +63,7 @@
         $form_options = form_options(eCRC($environment["ebene"]).".".$environment["kategorie"]);
 
         // form elememte bauen
-        $element = form_elements( $cfg["publikationen"]["db"]["leer"]["entries"], $form_values );
+        $element = form_elements( $cfg["publikationen"]["db"]["main"]["entries"], $form_values );
 
         // form elemente erweitern
         $element["extension1"] = "<input name=\"extension1\" type=\"text\" maxlength=\"5\" size=\"5\">";
@@ -153,7 +153,7 @@
                 #$ldate = substr($ldate,6,4)."-".substr($ldate,3,2)."-".substr($ldate,0,2)." ".substr($ldate,11,9);
                 #$sqla .= ", ldate='".$ldate."'";
 
-                $sql = "update ".$cfg["publikationen"]["db"]["leer"]["entries"]." SET ".$sqla." WHERE ".$cfg["publikationen"]["db"]["leer"]["key"]."='".$environment["parameter"][1]."'";
+                $sql = "update ".$cfg["publikationen"]["db"]["main"]["entries"]." SET ".$sqla." WHERE ".$cfg["publikationen"]["db"]["main"]["key"]."='".$environment["parameter"][1]."'";
                 if ( $debugging["sql_enable"] ) $debugging["ausgabe"] .= "sql: ".$sql.$debugging["char"];
                 $result  = $db -> query($sql);
                 if ( !$result ) $ausgaben["form_error"] .= $db -> error("#(error_result)<br />");
