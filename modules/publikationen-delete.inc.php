@@ -81,8 +81,8 @@
             $result = $db -> query($sql);
             $data = $db -> fetch_array($result, null);
             $ausgaben["form_id1"] = $data["id"];
-            $ausgaben["field1"] = $data["field1"];
-            $ausgaben["field2"] = $data["field2"];
+            $ausgaben["titel"] = $data["titel"];
+            $ausgaben["alternativ"] = $data["alternativ"];
 
             // funktions bereich fuer erweiterungen
             // ***

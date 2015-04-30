@@ -81,8 +81,8 @@
         if ( $debugging["sql_enable"] ) $debugging["ausgabe"] .= "sql: ".$sql.$debugging["char"];
         $result = $db -> query($sql);
         $data = $db -> fetch_array($result,1);
-        $ausgaben["field1"] = $data["field1"];
-        $ausgaben["field2"] = $data["field2"];
+        $ausgaben["titel"] = $data["titel"];
+        $ausgaben["alternativ"] = $data["alternativ"];
 
         // +++
         // funktions bereich
