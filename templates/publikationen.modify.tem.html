@@ -14,10 +14,20 @@
         <p>#(inhalt)</p>
         <p>!#ausgaben_form_error</p>
         <fieldset>
-            <label for="field1">#(field1)</label>
-            !#element_field1
-            <label for="field2">#(field2)</label>
-            !#element_field2
+            <label for="titel">g(pb_titel)</label>
+            !#element_titel
+            <label for="alternativ">g(pb_alternativ)</label>
+            !#element_alternativ
+            <label for="datum">g(pb_datum)</label>
+            !#element_datum
+            <label for="herausgeber">g(pb_herausgeber)</label>
+            !#element_herausgeber
+            <label for="beschreibung">g(pb_beschreibung)</label>
+            !#element_beschreibung
+            <label for="link">g(pb_link)</label>
+            !#element_link
+            <label for="bild_id">g(pb_bild_id)</label>
+            !#element_bild_id
             <input type="hidden" name="form_referer" value="!#ausgaben_form_referer" class="hidden" />
             <div class="clearer">&nbsp;</div>
             <input type="submit" name="send[]" value="g(send)" class="first" />

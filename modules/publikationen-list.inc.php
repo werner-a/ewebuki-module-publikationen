@@ -82,7 +82,7 @@
             // der uebersicht halber fuellt das erweiterte modul aber einzeln benannte marken
             $dataloop["list"][$data["id"]] = array(
                                    "color" => $cfg["publikationen"]["color"]["set"],
-                                  "field1" => $data["field1"],
+                                  "titel" => $data["titel"],
                                     "edit" => $cfg["publikationen"]["basis"]."/edit,".$data["id"].".html",
                                   "delete" => $cfg["publikationen"]["basis"]."/delete,".$data["id"].".html",
                                  "details" => $cfg["publikationen"]["basis"]."/details,".$data["id"].".html",
