@@ -46,16 +46,16 @@ CREATE TABLE db_publikationen (
 -- Data for Name: db_publikationen; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO db_publikationen (id, titel, alternativ, datum, herausgeber, beschreibung, link, bild_id) VALUES (4, 'Titel0', 'Alternativ0', '2015-04-30', 'Herausgeber0', 'Inhalt0', 'Link0', 1);
-INSERT INTO db_publikationen (id, titel, alternativ, datum, herausgeber, beschreibung, link, bild_id) VALUES (5, 'Titel1', 'Alternativ1', '2015-04-30', 'Herausgeber1', 'Inhalt1', 'Link1', 2);
-INSERT INTO db_publikationen (id, titel, alternativ, datum, herausgeber, beschreibung, link, bild_id) VALUES (6, 'Titel2', 'Alternativ2', '2015-04-30', 'Herausgeber2', 'Inhalt2', 'Link2', 3);
+INSERT INTO db_publikationen (id, titel, alternativ, datum, herausgeber, beschreibung, link, bild_id) VALUES (1, 'Titel0', 'Alternativ0', '2015-04-30', 'Herausgeber0', 'Inhalt0', 'Link0', 1);
+INSERT INTO db_publikationen (id, titel, alternativ, datum, herausgeber, beschreibung, link, bild_id) VALUES (2, 'Titel1', 'Alternativ1', '2015-04-30', 'Herausgeber1', 'Inhalt1', 'Link1', 2);
+INSERT INTO db_publikationen (id, titel, alternativ, datum, herausgeber, beschreibung, link, bild_id) VALUES (3, 'Titel2', 'Alternativ2', '2015-04-30', 'Herausgeber2', 'Inhalt2', 'Link2', 3);
 
 
 --
 -- Name: db_publikationen_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('db_publikationen_id_seq', 6, true);
+SELECT pg_catalog.setval('db_publikationen_id_seq', 3, true);
 
 
 --
