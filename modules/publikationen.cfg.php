@@ -53,7 +53,8 @@
                        ),
          "function" => array(
                       "add" => array(""),
-                     "edit" => array(""),
+                     "edit" => array(),
+              "edit,shared" => array("filelist"),
                    "delete" => array(""),
                   "details" => array(""),
               #"edit,shared" => array("shared1", "shared2"),

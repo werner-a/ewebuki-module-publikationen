@@ -58,7 +58,7 @@
         } else {
             $form_values = $_POST;
         }
-
+        
         // form options holen
         $form_options = form_options(eCRC($environment["ebene"]).".".$environment["kategorie"]);
 
@@ -76,7 +76,31 @@
         // funktions bereich fuer erweiterungen
         // ***
 
-        ### put your code here ###
+
+        $found = array($form_values["bild_id"]);
+        if ( is_array(@$_SESSION["file_memo"]) ) {
+            $array = array_merge($_SESSION["file_memo"],$found);
+        } else {
+            $array = $found;
+        }
+        $debugging["ausgabe"] .= "<pre>File ID ".print_r($array, True)."</pre>";
+        
+
+        // wenn es thumbnails gibt, anzeigen
+        
+        if ( count($array) >= 1 ) {
+            $where = "";
+            foreach ( $array as $value ) {
+                if ( $where != "" ) $where .= " OR ";
+                $where .= "fid = '".$value."'";
+            }
+            $sql = "SELECT *
+                      FROM site_file
+                     WHERE ".$where."
+                  ORDER BY ffname, funder";
+            $result = $db -> query($sql);
+            filelist($result, "publikationen");
+        }     
 
         // +++
         // funktions bereich fuer erweiterungen

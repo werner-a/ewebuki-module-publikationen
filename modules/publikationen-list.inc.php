@@ -53,7 +53,8 @@
         /* z.B. db query */
 
         $sql = "SELECT *
-                  FROM ".$cfg["publikationen"]["db"]["main"]["entries"];
+                  FROM ".$cfg["publikationen"]["db"]["main"]["entries"]."
+                  ORDER BY titel ASC";
         if ( $debugging["sql_enable"] ) $debugging["ausgabe"] .= "sql: ".$sql.$debugging["char"];
 
         // seiten umschalter
