@@ -1,0 +1,7 @@
+de	pb_titel	global	1	/publikationen	add	-1	0	Titel der Broschüre	2015-04-30 10:53:23	Doe	John	john.doe@ewebuki.de	ewebuki	1
+de	pb_alternativ	global	1	/publikationen	add	-1	0	Alternativ-Titel	2015-04-30 10:53:35	Doe	John	john.doe@ewebuki.de	ewebuki	1
+de	pb_datum	global	1	/publikationen	add	-1	0	Datum der Herausgabe (Monat und Jahr)	2015-04-30 10:54:17	Doe	John	john.doe@ewebuki.de	ewebuki	1
+de	pb_herausgeber	global	1	/publikationen	add	-1	0	Herausgeber	2015-04-30 10:54:27	Doe	John	john.doe@ewebuki.de	ewebuki	1
+de	pb_beschreibung	global	1	/publikationen	add	-1	0	Inhaltsbeschreibung	2015-04-30 10:54:40	Doe	John	john.doe@ewebuki.de	ewebuki	1
+de	pb_link	global	1	/publikationen	add	-1	0	Link	2015-04-30 10:54:50	Doe	John	john.doe@ewebuki.de	ewebuki	1
+de	pb_bild_id	global	1	/publikationen	add	-1	0	Bild ID	2015-04-30 10:55:04	Doe	John	john.doe@ewebuki.de	ewebuki	1
