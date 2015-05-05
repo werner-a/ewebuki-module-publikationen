@@ -65,7 +65,7 @@
                           "entries" => "db_publikationen",
                               "key" => "id",
                             "order" => "sort, label",
-                            "rows"  => 4,
+                            "rows"  => 10,
                      ),
               ),
             "right" => "",

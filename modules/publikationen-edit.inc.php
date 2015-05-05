@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // "$Id: publikationen-edit.inc.php 2035 2015-03-09 16:29:52Z werner.ammon@gmail.com $";
 // "publikationen - edit funktion";
@@ -58,7 +58,23 @@
         } else {
             $form_values = $_POST;
         }
-        
+
+        //$debugging["ausgabe"] .= "<pre>Session: ".print_r($_SESSION, True)."</pre>";
+        $referer = @$_SERVER['HTTP_REFERER'];
+        if ( strstr($referer, "fileed/list") ) {          
+            if ( count(@$_SESSION["file_memo"]) == 1 ) {
+                $debugging["ausgabe"] .= "<pre>File ID: ".print_r($_SESSION["file_memo"], True)."</pre>";
+                $bild_id = array_merge($_SESSION["file_memo"]);
+                $debugging["ausgabe"] .= "<pre>New File ID: ".print_r($bild_id, True)."</pre>";
+                $form_values["bild_id"] = $bild_id[0];
+                unset($_SESSION["file_memo"]);
+            } else {
+                $header = $pathvars["virtual"]."/admin/fileed/list.html";
+                $ausgaben["form_error"] = "Warnung: Es darf nur ein Bild ausgewählt werden.";
+                #header("Location: ".$header); // hier würde ich am liebsten in den fileed zurück und dort nen fehler anzeigen
+            }
+        }
+
         // form options holen
         $form_options = form_options(eCRC($environment["ebene"]).".".$environment["kategorie"]);
 
@@ -69,6 +85,16 @@
         $element["extension1"] = "<input name=\"extension1\" type=\"text\" maxlength=\"5\" size=\"5\">";
         $element["extension2"] = "<input name=\"extension2\" type=\"text\" maxlength=\"5\" size=\"5\">";
 
+        $sql = "SELECT *
+                FROM site_file
+                WHERE fid = ".$form_values["bild_id"];
+        $result = $db -> query($sql);
+        $data = $db -> fetch_array($result, 1);
+        $ausgaben["img"] = $cfg["file"]["base"]["webdir"].
+                          $data["ffart"]."/".
+                          $data["fid"]."/tn/";             
+        //$debugging["ausgabe"] .= "<pre>Picture Data: ".print_r($data, True)."</pre>";
+        
         // +++
         // page basics
 
@@ -76,32 +102,8 @@
         // funktions bereich fuer erweiterungen
         // ***
 
-
-        $found = array($form_values["bild_id"]);
-        if ( is_array(@$_SESSION["file_memo"]) ) {
-            $array = array_merge($_SESSION["file_memo"],$found);
-        } else {
-            $array = $found;
-        }
-        $debugging["ausgabe"] .= "<pre>File ID ".print_r($array, True)."</pre>";
+        ### put your code here ###
         
-
-        // wenn es thumbnails gibt, anzeigen
-        
-        if ( count($array) >= 1 ) {
-            $where = "";
-            foreach ( $array as $value ) {
-                if ( $where != "" ) $where .= " OR ";
-                $where .= "fid = '".$value."'";
-            }
-            $sql = "SELECT *
-                      FROM site_file
-                     WHERE ".$where."
-                  ORDER BY ffname, funder";
-            $result = $db -> query($sql);
-            filelist($result, "publikationen");
-        }     
-
         // +++
         // funktions bereich fuer erweiterungen
 
@@ -110,7 +112,7 @@
         // ***
 
         // fehlermeldungen
-        $ausgaben["form_error"] = null;
+        if ( empty($ausgaben["form_error"]) ) $ausgaben["form_error"] = null;
 
         // navigation erstellen
         $ausgaben["form_aktion"] = $cfg["publikationen"]["basis"]."/edit,".$environment["parameter"][1].",verify.html";
@@ -142,10 +144,10 @@
         if ( !isset($environment["parameter"][2]) ) $environment["parameter"][2] = null;
         if ( $environment["parameter"][2] == "verify"
             &&  ( isset($_POST["send"])
-                || isset($_POST["extension1"])
+                || isset($_POST["change"])
                 || isset($_POST["extension2"]) ) ) {
 
-            // form eingaben pr�fen
+            // form eingaben prüfen
             form_errors( $form_options, $_POST );
 
             // evtl. zusaetzliche datensatz aendern
@@ -156,7 +158,7 @@
 
                 ### put your code here ###
 
-                if ( $error ) $ausgaben["form_error"] .= $db -> error("#(error_result)<br />");
+                if ( isset($error) ) $ausgaben["form_error"] .= $db -> error("#(error_result)<br />");
                 // +++
                 // funktions bereich fuer erweiterungen
             }
@@ -164,7 +166,8 @@
             // datensatz aendern
             if ( !isset($ausgaben["form_error"]) ) {
 
-                $kick = array( "PHPSESSID", "form_referer", "send" );
+                $kick = array( "PHPSESSID", "form_referer", "send", "change" );
+                $sqla = null;
                 foreach($_POST as $name => $value) {
                     if ( !in_array($name,$kick) && !strstr($name, ")" ) ) {
                         if ( isset($sqla) ) $sqla .= ", ";
@@ -186,6 +189,14 @@
 
             // wenn es keine fehlermeldungen gab, die uri $header laden
             if ( !isset($ausgaben["form_error"]) ) {
+                if ( isset($_POST["change"]) ) {
+                    unset($_SESSION["file_memo"]);
+                    $_SESSION["cms_last_edit"] = str_replace(",verify", "", $pathvars["requested"]);
+                    $_SESSION["cms_last_referer"] = $ausgaben["form_referer"];
+                    $_SESSION["cms_last_ebene"] = $_SESSION["ebene"];
+                    $_SESSION["cms_last_kategorie"] = $_SESSION["kategorie"];
+                    $header = $pathvars["virtual"]."/admin/fileed/list.html";
+                }
                 header("Location: ".$header);
             }
         }

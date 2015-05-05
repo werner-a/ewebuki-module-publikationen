@@ -13,7 +13,9 @@
         <h1>#(ueberschrift)</h1>
         <p>#(inhalt)</p>
         <p>!#ausgaben_form_error</p>
+               
         <fieldset>
+            
             <label for="titel">g(pb_titel)</label>
             !#element_titel
             <label for="alternativ">g(pb_alternativ)</label>
@@ -28,18 +30,14 @@
             !#element_link
             <label for="bild_id">g(pb_bild_id)</label>
             !#element_bild_id
+            <p><img src="!#ausgaben_img" !{size} alt="!#ausgaben_alt" title="!#ausgaben_title"/></p>
 
-            <!--##loop-list_images-->
-                <li class="thumbs">
-                    <p><input type="button" id="eb_imgo" value="O" title="Einfügen Original (original)" onclick="!{oclick}" class="butfil" /></p>
-                    <img src="!{src}" !{size} alt="!{alt}" title="!{title} g(edit)" onclick="!{oclick}" />
-                </li>
-            <!--##cont-->
+            <input type="submit" name="change[]" value="change" class="first" />
             
             <input type="hidden" name="form_referer" value="!#ausgaben_form_referer" class="hidden" />
             <div class="clearer">&nbsp;</div>
             <input type="submit" name="send[]" value="g(send)" class="first" />
-            <input type="reset" name="reset" value="g(reset)" class="next" />
+            <input type="reset" name="reset" value="g(reset)" class="next" />            
             <input type="button" name="abort" value="g(abort)" onclick="location='!#ausgaben_form_break'" class="next" />
             <div class="clearer">&nbsp;</div>
         </fieldset>

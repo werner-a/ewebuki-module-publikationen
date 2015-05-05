@@ -53,6 +53,31 @@
             $form_values = $_POST;
         #}
 
+        if ( !isset($form_values["titel"]) ) $form_values["titel"] = "test_titel";
+        if ( !isset($form_values["alternativ"]) ) $form_values["alternativ"] = "test_alternativ";
+        if ( !isset($form_values["herausgeber"]) ) $form_values["herausgeber"] = "test_herausgeber";
+        if ( !isset($form_values["beschreibung"]) ) $form_values["beschreibung"] = "test_beschreibung";
+        if ( !isset($form_values["link"]) ) $form_values["link"] = "test_link";
+        if ( !isset($form_values["bild_id"]) ) $form_values["bild_id"] = 1;
+
+        
+        
+        //$debugging["ausgabe"] .= "<pre>Session: ".print_r($_SESSION, True)."</pre>";
+        $referer = @$_SERVER['HTTP_REFERER'];
+        if ( strstr($referer, "fileed/list") ) {          
+            if ( count(@$_SESSION["file_memo"]) == 1 ) {
+                $debugging["ausgabe"] .= "<pre>File ID: ".print_r($_SESSION["file_memo"], True)."</pre>";
+                $bild_id = array_merge($_SESSION["file_memo"]);
+                $debugging["ausgabe"] .= "<pre>New File ID: ".print_r($bild_id, True)."</pre>";
+                $form_values["bild_id"] = $bild_id[0];
+                unset($_SESSION["file_memo"]);
+            } else {
+                $header = $pathvars["virtual"]."/admin/fileed/list.html";
+                $ausgaben["form_error"] = "Warnung: Es darf nur ein Bild ausgewählt werden.";
+                #header("Location: ".$header); // hier würde ich am liebsten in den fileed zurück und dort nen fehler anzeigen
+            }
+        }
+        
         // form options holen
         $form_options = form_options(eCRC($environment["ebene"]).".".$environment["kategorie"]);
 
@@ -113,7 +138,7 @@
         if ( !isset($environment["parameter"][2]) ) $environment["parameter"][2] = null;
         if ( $environment["parameter"][2] == "verify"
             && (    isset($_POST["send"])
-                 || isset($_POST["extension1"])
+                 || isset($_POST["change"])
                  || isset($_POST["extension2"]) )
                ) {
 
@@ -136,7 +161,7 @@
             // datensatz anlegen
             if ( !isset($ausgaben["form_error"]) ) {
 
-                $kick = array( "PHPSESSID", "form_referer", "send", "avail" );
+                $kick = array( "PHPSESSID", "form_referer", "send", "change" );
                 foreach($_POST as $name => $value) {
                     if ( !in_array($name,$kick) ) {
                         if ( isset($sqla) ) $sqla .= ",";
@@ -152,15 +177,26 @@
 
                 $sql = "insert into ".$cfg["publikationen"]["db"]["main"]["entries"]." (".$sqla.") VALUES (".$sqlb.")";
                 if ( $debugging["sql_enable"] ) $debugging["ausgabe"] .= "sql: ".$sql.$debugging["char"];
-                $result  = $db -> query($sql);
+                $result = $db -> query($sql);
+                $lastid = $db -> lastid($result);
+                
                 if ( !$result ) $ausgaben["form_error"] .= $db -> error("#(error_result)<br />");
                 if ( !isset($header) ) $header = $cfg["publikationen"]["basis"]."/list.html";
             }
 
             // wenn es keine fehlermeldungen gab, die uri $header laden
             if ( !isset($ausgaben["form_error"]) ) {
+                if ( isset($_POST["change"]) ) {
+                    #unset($_SESSION["file_memo"]);
+                    $_SESSION["cms_last_edit"] = str_replace(",verify", "", $pathvars["requested"]);
+                    $_SESSION["cms_last_edit"] = str_replace("add", "edit,".$lastid, $pathvars["requested"]);
+                    $_SESSION["cms_last_referer"] = $ausgaben["form_referer"];
+                    $_SESSION["cms_last_ebene"] = $_SESSION["ebene"];
+                    $_SESSION["cms_last_kategorie"] = $_SESSION["kategorie"];
+                    $header = $pathvars["virtual"]."/admin/fileed/list.html";
+                }
                 header("Location: ".$header);
-            }
+            }                       
         }
     } else {
         header("Location: ".$pathvars["virtual"]."/");
